@@ -1,6 +1,10 @@
 <!doctype html>
 <html>
     <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>crewtrip</title>
 
         <link rel="stylesheet" type="text/css" href="slider.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -8,29 +12,51 @@
 
         <script src="resources/slider.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="resources/style.css">
     </head>
     <body>
-        <img src="logo.png" alt="" width="300" height="300">
-        <h1>Crew Trip</h1>
-        <form action="" id="number">
 
-            <div class="slidecontainer">
-                <p>Travel Distance</p>
-              <input type="range" min="1" max="100" value="50">
-            </div>
-            <div class="slidecontainer">
-                <p>Weather</p>
-              <input type="range" min="1" max="100" value="50">
-            </div>
-            <div class="slidecontainer">
-                <p>Cost</p>
-              <input type="range" min="1" max="100" value="50">
-            </div>
-            <div class="slidecontainer">
-                <p>Popularity</p>
-              <input type="range" min="1" max="100" value="50">
-            </div>
-          <a href="activities.html">go</a>
+      <!-- Navigation bar -->
+      <nav class="navbar navbar-fixed-top orange">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="index.html"><img src="logotype.png" alt="crewtrip logotype" width="100"></a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="container">
+        <h1>Preferences</h1><br>
+
+        <form action="" id="number">
+          <div class="slidecontainer">
+            <label for="customRange1">Travel Distance</label></br>
+            <input type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="1">
+          </div>
+
+          <div class="slidecontainer">
+            <label for="customRange1">Weather</label></br>
+            <input type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
+          </div>
+
+          <div class="slidecontainer">
+            <label for="customRange1">Budget</label></br>
+            <input type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="1">
+          </div>
+
+          <div class="slidecontainer">
+            <label for="customRange1">Popularity of Destination</label></br>
+            <input type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="1">
+          </div>
         </form>
+        <br>
+
+        <a href="start.html"><button type="button" class="btn btn-warning"> <img src="arrow.png" class="b" width="6"/></button></a>
+        <a href="activities.html"><button type="button" class="btn btn-info">INTERESTS <img src="arrow.png" class="a" width="6"/></button></a>
+
+      </div>
+
+
     </body>
 </html>
