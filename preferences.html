@@ -10,52 +10,63 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-        <script src="resources/slider.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
+        <!-- some things in stylesheet override bootstrap -->
         <link rel="stylesheet" href="resources/style.css">
     </head>
     <body>
 
       <!-- Navigation bar -->
-      <nav class="navbar navbar-fixed-top orange">
+      <nav class="navbar navbar-fixed-top bg-transparent shadow-sm">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"><img src="logotype.png" alt="crewtrip logotype" width="100"></a>
+            <a class="navbar-brand" href="index.html"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
           </div>
         </div>
       </nav>
+      <!-- End navbar  -->
 
       <div class="container">
-        <h1>Preferences</h1><br>
 
-        <form action="" id="number">
-          <div class="slidecontainer">
-            <label for="customRange1">Travel Distance</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="1">
-          </div>
+        <!-- BEGIN FORM CARD -->
+      <div class="card w-75 mb-3 mt-5 shadow-sm">
+        <div class="card-body">
+          <h1>Preferences</h1><br>
 
-          <div class="slidecontainer">
-            <label for="customRange1">Weather</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
-          </div>
+          <form action="activities.html" id="number">
+            <div class="slidecontainer">
+              <label for="customRange1">Travel Distance</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="1">
+            </div>
 
-          <div class="slidecontainer">
-            <label for="customRange1">Budget</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="1">
-          </div>
+            <div class="slidecontainer">
+              <label for="customRange1">Weather</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
+            </div>
 
-          <div class="slidecontainer">
-            <label for="customRange1">Popularity of Destination</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="1">
-          </div>
-        </form>
-        <br>
+            <div class="slidecontainer">
+              <label for="customRange1">Budget</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="1">
+            </div>
 
-        <a href="start.html"><button type="button" class="btn btn-warning"> <img src="arrow.png" class="b" width="6"/></button></a>
-        <a href="activities.html"><button type="button" class="btn btn-info">INTERESTS <img src="arrow.png" class="a" width="6"/></button></a>
+            <div class="slidecontainer">
+              <label for="customRange1">Popularity of Destination</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="1">
+            </div>
 
+            <!-- BUTTONS -->
+            <a href="start.html"><button type="button" class="btn btn-warning mt-4"> <img src="arrow.png" class="b" width="6"/></button></a>
+
+            <button type="submit" class="btn btn-primary mt-4">INTERESTS <img src="arrow.png" class="a" width="6"/></button>
+            <!-- END BUTTONS -->
+            </div>
+
+
+          </form>
+        </div>
       </div>
+      <!-- END FORM CARD  -->
+      <br>
+
 
 
     </body>

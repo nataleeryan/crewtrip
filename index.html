@@ -8,36 +8,55 @@
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
+      <!-- some things in stylesheet override bootstrap -->
+      <link rel="stylesheet" href="resources/style.css">
 
     </head>
 
 
     <body>
+
+      <!-- NAVIGATION BAR FOR LANDING  -->
+      <nav class="navbar bg-transparent">
+        <img src="logo-dark.png" alt="" width="120">
+        <form class="form-inline my-2 my-lg-0 ml-auto">
+            <button id="menubtn" class="btn btn-outline-danger mr-2 mr-sm-0 pull-right" type="submit">Sign In</button>
+        </form>
+      </nav>
+      <!-- END NAVIGATION BAR -->
+
+
+      <!-- BACKGROUND  -->
       <div class="jumbotron jumbotron-fluid">
         <div class="container" align="center" alt="crewtrip logo">
-          <img src="logo.png" alt="" width="300" height="300" alt="crewtrip logotype"><br>
-          <img src="logotype.png" alt="" width="300">
+          <img src="logo.png" alt="" width="150" alt="crewtrip logotype"><br/><br/>
+          <p style="color:white; font-weight: 100; font-size: 18px;"><b>The vacation planner that works for (and with) everyone.</p></b>
+
+          <a href="start.html"><button type="button" class="btn btn-info">START PLANNING <img src="arrow.png" class="a" width="6"/></button></a>
         </div>
       </div>
+      <!-- END BACKGROUND -->
 
 
 
-      <div class="container" align="center">
-
-        <a href="start.html"><button type="button" class="btn btn-info">START PLANNING <img src="arrow.png" class="a" width="6"/></button></a>
-
-        <!-- <h3>How many people are in your crew?</h3>
-        <form action="" id="number">
-          <div>
-            <input id="members" autocomplete="off"/>
-          </div>
-
-          <a href="preferences.html">go</a> -->
-        </form>
+      <!-- BELOW BG TEXT  -->
+      <div class="container" align="left">
+        <br/>
+        <h1>Planning a trip among friends or family can be difficult.</h1>
+        <div class="w">
+          <p>Our application will help your group coordinate the perfect trip in a fair and fun way. By gathering the preferences of each member, CrewTrip will then generate travel destinations that work best for everyone.</p>
+        </div>
+      </br>
+        <h1>Our API</h1>
+        <div class="w">
+          <p>CrewTrip's API utilizes our technologies to give you the average of the preferences entered by the group, suggested destinations and the place details, and mutual availabilities.
       </div>
+      <!-- END -->
+
+
+
     </body>
 </html>

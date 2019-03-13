@@ -1,71 +1,82 @@
 <!doctype html>
 <html>
     <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>crewtrip</title>
 
-        <link rel="stylesheet" type="text/css" href="slider.css">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-        <script src="resources/slider.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-
-        <link rel="stylesheet" href="resources/style.css">
+        <!-- some things in stylesheet override bootstrap -->
+      <link rel="stylesheet" href="resources/style.css">
     </head>
     <body>
+
       <!-- Navigation bar -->
-      <nav class="navbar navbar-fixed-top orange">
+      <nav class="navbar navbar-fixed-top bg-transparent shadow-sm">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"><img src="logotype.png" alt="crewtrip logotype" width="100"></a>
+            <a class="navbar-brand" href="index.html"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
           </div>
         </div>
       </nav>
+      <!-- End navbar  -->
 
       <div class="container" align="center">
-        <h1>Your Crew Trip</h1>
-        <p>Your trip is 6/01/2019 to 6/05/2019.</p><br>
+        <!-- BEGIN FORM CARD -->
+        <div class="card w-75 mb-5 mt-5 shadow-sm">
+          <div class="card-body">
+            <h1>Your Crew Trip</h1>
+            <p>Your trip is 6/01/2019 to 6/05/2019.</p><br>
 
 
-        <form action="" id="number">
-          <div class="slidecontainer">
-            <label for="customRange1">Average Travel Distance</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="100">
-          </div>
+            <form action="" id="number">
+              <div class="slidecontainer">
+                <label for="customRange1">Average Travel Distance</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="100">
+            </div>
 
-          <div class="slidecontainer">
-            <label for="customRange1">Average Preferred Weather</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
-          </div>
+            <div class="slidecontainer">
+              <label for="customRange1">Average Preferred Weather</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
+            </div>
 
-          <div class="slidecontainer">
-            <label for="customRange1">Average Price Range</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="300">
-          </div>
+            <div class="slidecontainer">
+              <label for="customRange1">Average Price Range</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="300">
+            </div>
 
-          <div class="slidecontainer">
-            <label for="customRange1">Popularity of Destination</label></br>
-            <input type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="40">
-          </div>
-        </form><br>
+            <div class="slidecontainer">
+              <label for="customRange1">Popularity of Destination</label></br>
+              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="40">
+            </div>
+          </form><br>
 
 
-        <h2>Most Common Intersts</h2>
+          <h2>Most Common Intersts</h2>
 
-          <ul class="list-unstyled">
+            <ul class="list-unstyled">
               <li>music</li>
               <li>amusement</li>
-          </ul><br>
+            </ul><br>
+
+          </div>
+        </div>
+        <!-- END FORM CARD -->
 
 
 
         <h2>Suggested Destinations</h2>
-        <!--Google map-->
-        <div id="map-container-google-1" class="z-depth-1-half map-container" style="height:500px">
-          <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
+          <!--Google map-->
+          <div id="map-container-google-1" class="z-depth-1-half map-container" style="height:500px">
+            <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
           style="border:0" allowfullscreen></iframe>
-        </div>
+          </div>
 
         <!--Google Maps-->
+
 
 
       </div>
