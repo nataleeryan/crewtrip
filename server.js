@@ -24,7 +24,8 @@ app.post('/preferences',function(req,res){
     MongoClient.connect(url,function(err,db){
         if (err) throw err;
         var dbo = db.db("crewtrip");
-        var myobj = {num: req.body.num, location: req.body.starting};
+        var myobj = {num: req.body.num,
+                    location: req.body.starting};
         dbo.collection("trips").insertOne(myobj,function(err,res){
             if(err) throw err;
             console.log("document inserted");

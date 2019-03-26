@@ -39,31 +39,46 @@
         <div class="card-body">
           <h1>Preferences</h1><br>
 
-          <form action="activities.html" id="number">
-            <div class="slidecontainer">
-              <label for="customRange1">Travel Distance</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="1">
-            </div>
+          <form action="results.html" id="number">
 
-            <div class="slidecontainer">
-              <label for="customRange1">Weather</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
-            </div>
 
-            <div class="slidecontainer">
-              <label for="customRange1">Budget</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="1">
-            </div>
+              <div class="slidecontainer">
+                <label for="customRange1">Travel Distance</label></br>
+                <input name="distance" type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="1">
+              </div>
 
-            <div class="slidecontainer">
-              <label for="customRange1">Popularity of Destination</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="1">
-            </div>
+              <div class="slidecontainer">
+                <label for="customRange1">Weather</label></br>
+                <input name="weather" type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
+              </div>
+
+              <div class="slidecontainer">
+                <label for="customRange1">Budget</label></br>
+                <input name="budget" type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="1">
+              </div>
+
+              <div class="slidecontainer">
+                <label for="customRange1">Popularity of Destination</label></br>
+                <input name="pop" type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="1">
+              </div>
+
+              <br><h1>Activities</h1><br>
+
+              <input type="checkbox"> Music</br>
+              <input type="checkbox"> Amusement Parks</br>
+              <input type="checkbox"> Sight-seeing</br>
+              <input type="checkbox"> Beach / Coast</br>
+              <input type="checkbox"> Music<br>
+              </br>
+
+              <h1>Availability</h1>
+              <input class="form-control w-50" type="text" name="daterange"     value="01/01/2019 - 01/15/2019" />
+
 
             <!-- BUTTONS -->
             <a href="start.html"><button type="button" class="btn btn-warning mt-4"> <img src="arrow.png" class="b" width="6"/></button></a>
 
-            <button type="submit" class="btn btn-primary mt-4">INTERESTS <img src="arrow.png" class="a" width="6"/></button>
+            <button type="submit" class="btn btn-primary mt-4">FINISH <img src="arrow.png" class="a" width="6"/></button>
             <!-- END BUTTONS -->
             </div>
 
