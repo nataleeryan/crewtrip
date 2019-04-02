@@ -19,6 +19,12 @@
 
       <!-- some things in stylesheet override bootstrap -->
       <link rel="stylesheet" href="resources/style.css">
+
+      <!-- For date picker -->
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     </head>
     <body>
 
@@ -30,6 +36,9 @@
           </div>
         </div>
       </nav>
+      <!-- <div class="progress-container">
+        <div class="progress-bar" id="myBar"></div>
+      </div> -->
       <!-- End navbar  -->
 
       <div class="container">
@@ -72,7 +81,7 @@
               </br>
 
               <h1>Availability</h1>
-              <input class="form-control w-50" type="text" name="daterange"     value="01/01/2019 - 01/15/2019" />
+              <input class="form-control w-50" type="text" name="daterange" value="01/01/2019 - 01/15/2019" />
 
 
             <!-- BUTTONS -->
@@ -88,7 +97,16 @@
       </div>
       <!-- END FORM CARD  -->
       <br>
-
+      <script src="script.js"></script>
+      <script>
+      $(function() {
+        $('input[name="daterange"]').daterangepicker({
+          opens: 'left'
+        }, function(start, end, label) {
+          console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+      });
+      </script>
 
 
     </body>

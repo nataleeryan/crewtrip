@@ -11,7 +11,6 @@
       <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
       <link rel="manifest" href="site.webmanifest">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
       <!-- FAVICON END -->
 
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -51,27 +50,16 @@
           <!-- BEGIN FORM CARD -->
         <div class="card w-75 mb-3 mt-5 shadow-sm">
           <div class="card-body">
-          <h1>Start a new trip</h1>
-          <p>CrewTrip will gather your entire group's preferences and suggest the perfect destination that will work for everyone.</p><br/>
+          <h1>Join an existing trip.</h1><br>
 
           <form action="preferences" method="post" id="startform">
             <div class="form-group">
 
+              <label for="starting">Enter your crew's Trip ID</label>
+              <input type="text" class="form-control w-50" placeholder="Trip ID" id="starting" maxlength="" name='starting'>
+              <small id="emailHelp" class="form-text text-muted">6 character trip ID sent to your email from trip planner.</small>
 
-            <label for="starting">What is your email?</label>
-            <input type="text" class="form-control w-75" placeholder="you@crewtrip.com" id="starting" name='starting'><br/><br/>
-
-            <div class="items">
-
-              <div class="form-group"><label>Invite friends!</label>
-                <input id="author_email" class="form-control w-75" name="author" required="required" type="EMAIL" placeholder="friend@crewtrip.com"/></div>
-
-              </div>
-
-              <button type="button" class="btn btn-success add_field_button">Invite more friends</button></br>
-
-
-
+            </div>
         </form>
             <!-- BUTTON -->
             <button type="submit" form="startform" class="btn btn-primary mt-4">GO <img src="arrow.png" class="a" width="6"/></button>
@@ -85,7 +73,6 @@
 
 
       </div>
-    <script src="script.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-4PL1O5-4f2h_ofU0-0NgREkUu3mKdiE&libraries=places"></script>
     <script>
     $(function() {
