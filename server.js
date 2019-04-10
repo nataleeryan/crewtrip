@@ -26,7 +26,6 @@ var transporter = nodemailer.createTransport({
 
 
 
-
 app.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/index.html'));
 });
@@ -43,7 +42,7 @@ app.post('/preferences',function(req,res){
     console.log(send_url);
     var mail={
         from:'crewwtrip@gmail.com',
-        to:req.body.starting,
+        to:req.body.mainEmail,
         subject:'Welcome to crewTrip',
         text:send_url.href
     };
@@ -60,7 +59,7 @@ app.post('/preferences',function(req,res){
     MongoClient.connect(url,function(err,db){
         if (err) throw err;
         var dbo = db.db("crewtrip");
-        var myobj = {id: tripid, owner: req.body.starting};
+        var myobj = {id: tripid, owner: req.body.mainEmail};
         dbo.collection("trip-owner").insertOne(myobj,function(err,res){
             if(err) throw err;
             console.log("document inserted");
@@ -84,6 +83,7 @@ app.get('/activities.html',function(req,res){
 app.get('/results.html',function(req,res){
     res.sendFile(path.join(__dirname+'/results.html'));
 });
+
 
 
 

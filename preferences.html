@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="app">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,12 +13,14 @@
       <link rel="manifest" href="site.webmanifest">
       <!-- FAVICON END -->
 
-      <link rel="stylesheet" type="text/css" href="slider.css">
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
       <!-- some things in stylesheet override bootstrap -->
       <link rel="stylesheet" href="resources/style.css">
+
+      <!-- angular -->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
 
       <!-- For date picker -->
       <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -32,7 +34,7 @@
       <nav class="navbar navbar-fixed-top bg-transparent shadow-sm">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
+            <a class="navbar-brand" href="./"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
           </div>
         </div>
       </nav>
@@ -71,14 +73,29 @@
                 <input name="pop" type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="1">
               </div>
 
-              <br><h1>Activities</h1><br>
 
-              <input type="checkbox"> Music</br>
-              <input type="checkbox"> Amusement Parks</br>
-              <input type="checkbox"> Sight-seeing</br>
-              <input type="checkbox"> Beach / Coast</br>
-              <input type="checkbox"> Music<br>
+
+              <br><h1>Activities</h1><br>
+              <div ng-controller="preferences">
+
+                <div class="activities">
+                <div ng-repeat="activity in activities" >
+                  <input type="checkbox" name="selectedActivities[]" value="{{activity.name}}" ng-model="activity.selected"> <label class="checkbox">{{activity.name}} 
+                  </label>
+                </div>
+                </div>
+
+
+                <!-- Adding Checkboxes -->
+                <div class="form-inline">
+                  <input id="checkboxName" type="text" class="form-control mx-sm-3 mb-2" placeholder="Activity Name">
+                  <button type="button" class="btn btn-success mb-2 add_checkbox_button">Add To List</button>
+                </div>
+
+              </div>
               </br>
+
+
 
               <h1>Availability</h1>
               <input class="form-control w-50" type="text" name="daterange" value="01/01/2019 - 01/15/2019" />
@@ -99,6 +116,7 @@
       <br>
       <script src="script.js"></script>
       <script>
+
       $(function() {
         $('input[name="daterange"]').daterangepicker({
           opens: 'left'

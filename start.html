@@ -39,7 +39,7 @@
       <nav class="navbar navbar-fixed-top bg-transparent shadow-sm">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
+            <a class="navbar-brand" href="./"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
           </div>
         </div>
       </nav>
@@ -57,9 +57,11 @@
           <form action="preferences" method="post" id="startform">
             <div class="form-group">
 
+            <label for="startingLocation">Whatt is your starting location?</label>
+            <input type="text" class="form-control w-75" id="startingLocation" name="startingLocation" placeholder="Enter an address"><br/>
 
-            <label for="starting">What is your email?</label>
-            <input type="text" class="form-control w-75" placeholder="you@crewtrip.com" id="starting" name='starting'><br/><br/>
+            <label for="mainEmail">What is your email?</label>
+            <input type="text" class="form-control w-75" placeholder="you@crewtrip.com" id="mainEmail" name='mainEmail'><br/><br/>
 
             <div class="items">
 
@@ -87,6 +89,7 @@
       </div>
     <script src="script.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-4PL1O5-4f2h_ofU0-0NgREkUu3mKdiE&libraries=places"></script>
+    <script type="text/javascript" src="./autocomplete.js"></script>
     <script>
     $(function() {
       $('input[name="daterange"]').daterangepicker({
@@ -96,6 +99,6 @@
       });
     });
     </script>
-    <script type="text/javascript" src="./autocomplete.js"></script>
+    
     </body>
 </html>
