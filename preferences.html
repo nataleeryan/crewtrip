@@ -50,7 +50,7 @@
         <div class="card-body">
           <h1>Preferences</h1><br>
 
-          <form action="results.html" id="number">
+          <form action="results" method="post" id="resultform" >
 
 
               <div class="slidecontainer">
@@ -80,7 +80,7 @@
 
                 <div class="activities">
                 <div ng-repeat="activity in activities" >
-                  <input type="checkbox" name="selectedActivities[]" value="{{activity.name}}" ng-model="activity.selected"> <label class="checkbox">{{activity.name}} 
+                  <input type="checkbox" name="selectedActivities[]" value="{{activity.name}}" ng-model="activity.selected"> <label class="checkbox">{{activity.name}}
                   </label>
                 </div>
                 </div>
@@ -104,12 +104,13 @@
             <!-- BUTTONS -->
             <a href="start.html"><button type="button" class="btn btn-warning mt-4"> <img src="arrow.png" class="b" width="6"/></button></a>
 
-            <button type="submit" class="btn btn-primary mt-4">FINISH <img src="arrow.png" class="a" width="6"/></button>
             <!-- END BUTTONS -->
             </div>
 
 
           </form>
+          <button type="submit" form="resultform" class="btn btn-primary mt-4">FINISH <img src="arrow.png" class="a" width="6"/></button>
+
         </div>
       </div>
       <!-- END FORM CARD  -->
