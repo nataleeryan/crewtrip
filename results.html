@@ -16,6 +16,8 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
+
+      </script>
         <!-- some things in stylesheet override bootstrap -->
       <link rel="stylesheet" href="resources/style.css">
     </head>
@@ -36,37 +38,36 @@
         <div class="card w-75 mb-5 mt-5 shadow-sm">
           <div class="card-body">
             <h1>Your Crew Trip</h1>
-            <p>Your trip is 6/01/2019 to 6/05/2019.</p><br>
+            <p>Your trip is <p id="start"></p> to <p id="end"></p>.</p><br>
 
 
             <form action="" id="number">
               <div class="slidecontainer">
                 <label for="customRange1">Average Travel Distance</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="100">
+              <input name="distance" type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="0">
             </div>
 
             <div class="slidecontainer">
               <label for="customRange1">Average Preferred Weather</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
+              <input  name="weather" type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="0">
             </div>
 
             <div class="slidecontainer">
               <label for="customRange1">Average Price Range</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="300">
+              <input name="price" type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="0">
             </div>
 
             <div class="slidecontainer">
               <label for="customRange1">Popularity of Destination</label></br>
-              <input type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="40">
+              <input name="popularity" type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="0">
             </div>
           </form><br>
 
 
-          <h2>Most Common Intersts</h2>
+          <h2>Activities Selected</h2>
 
-            <ul class="list-unstyled">
-              <li>music</li>
-              <li>amusement</li>
+            <ul id="activities" class="list-unstyled">
+
             </ul><br>
 
           </div>
@@ -88,4 +89,9 @@
 
       </div>
     </body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="./client_socket.io.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/client.js"></script>
 </html>

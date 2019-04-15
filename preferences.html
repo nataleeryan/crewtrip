@@ -49,8 +49,11 @@
       <div class="card w-75 mb-3 mt-5 shadow-sm">
         <div class="card-body">
           <h1>Preferences</h1><br>
+          <div ng-app="app" ng-controller="ctrl">
 
-          <form action="results" method="post" id="resultform" >
+
+          <form action="results?id={{id}}" method="post" id="resultform" >
+              </div>
 
 
               <div class="slidecontainer">
@@ -76,23 +79,18 @@
 
 
               <br><h1>Activities</h1><br>
-              <div ng-controller="preferences">
+              <div id="activities" name="acts">
 
-                <div class="activities">
-                <div ng-repeat="activity in activities" >
-                  <input type="checkbox" name="selectedActivities[]" value="{{activity.name}}" ng-model="activity.selected"> <label class="checkbox">{{activity.name}}
-                  </label>
-                </div>
-                </div>
+              </div>
 
 
                 <!-- Adding Checkboxes -->
                 <div class="form-inline">
                   <input id="checkboxName" type="text" class="form-control mx-sm-3 mb-2" placeholder="Activity Name">
-                  <button type="button" class="btn btn-success mb-2 add_checkbox_button">Add To List</button>
+                  <button id="add" type="button" class="btn btn-success mb-2 add_checkbox_button">Add To List</button>
                 </div>
 
-              </div>
+
               </br>
 
 
@@ -109,12 +107,16 @@
 
 
           </form>
+
           <button type="submit" form="resultform" class="btn btn-primary mt-4">FINISH <img src="arrow.png" class="a" width="6"/></button>
 
         </div>
       </div>
       <!-- END FORM CARD  -->
       <br>
+
+      <script src="./client_socket.io.js"></script>
+      <script src="/client.js"></script>
       <script src="script.js"></script>
       <script>
 
@@ -125,6 +127,15 @@
           console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
       });
+      </script>
+      <script>
+          var url_string = window.location.href; //window.location.href
+          var url = new URL(url_string);
+          var c = url.searchParams.get("id");
+          var app=angular.module('app',[]);
+          app.controller('ctrl',function($scope){
+            $scope.id=c;
+          });
       </script>
 
 
