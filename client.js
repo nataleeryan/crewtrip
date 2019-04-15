@@ -18,7 +18,7 @@ $('#activities').ready(function(){
     });
     return false;
 });
-$('#blah').ready(function(){
+$('#blah').click(function(){
     var id = getUrlParameter('id');
     socket.emit('loadavg',{
         "id":id,
