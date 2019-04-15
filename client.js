@@ -4,23 +4,48 @@ $('#add').click(function(){
     $('input').remove('.act');
     $('li').remove('.act');
     $('br').remove('.act');
+    var id = getUrlParameter('id');
     socket.emit('addactivity',{
+      "id":id,
       "activity":$("#checkboxName").val(),
     });
     return false;
 });
 $('#activities').ready(function(){
+    var id = getUrlParameter('id');
     socket.emit('loadacts',{
-
+      "id":id,
     });
     return false;
 });
+$('#blah').ready(function(){
+    var id = getUrlParameter('id');
+    socket.emit('loadavg',{
+        "id":id,
+    });
+    return false;
+});
+var getUrlParameter = function getUrlParameter(sParam) {
+    var sPageURL = window.location.search.substring(1),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+        }
+    }
+};
 socket.on('displayacts',function(data){
 
     for(var i=0;i<data.length;i++){
       $('#activities').append("<li class='act' type='checkbox' name='selectedActivities["+i+"]' value="+data[i]+" ng-model='activity.selected'>"+data[i]+"</li>")
     }
 });
+
 
 socket.on('update',function(data){
   $("input[name='weather']").val(data.avgW);

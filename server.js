@@ -80,80 +80,57 @@ app.get('/preferences',function(req,res){
     const current_url=new URL('localhost:3000'+req.url);
     var params = current_url.searchParams;
     var id = params.get('id');
-    io.on('connect',function(socket){
-      console.log("connected pref");
-      MongoClient.connect(url,function(err,db){
-        var dbo=db.db("crewtrip");
-        var query={id:id};
-        dbo.collection("activities").find(query).toArray(function(err,res){
-          data=[];
-          for(var i=0;i<res.length;i++){
-            data.push(res[i].act);
-          }
-          socket.emit("displayacts",data);
-          db.close();
-        });
-      });
-      socket.on('disconnect', function(){
-          console.log('user disconnected');
-      });
-      socket.on('addactivity',function(act){
-        MongoClient.connect(url,function(err,db){
-          var dbo=db.db("crewtrip");
-          var obj={id:id,act:act["activity"]};
-          dbo.collection("activities").insertOne(obj,function(err,res){
-            if(err) throw err;
-            console.log("activity inserted");
-          });
-          var query={id:id};
-          dbo.collection("activities").find(query).toArray(function(err,res){
-            data=[];
-            for(var i=0;i<res.length;i++){
-              data.push(res[i].act);
-            }
-            socket.emit("displayacts",data);
-            db.close();
-          });
-        });
-      });
-    });
+
     res.sendFile(path.join(__dirname+'/preferences.html'))
 });
 app.get('/activities.html',function(req,res){
     res.sendFile(path.join(__dirname+'/activities.html'));
 });
-
-app.post('/results',function(req,res){
-    const current_url=new URL('localhost:3000'+req.url);
-    var params = current_url.searchParams;
-    var id = params.get('id');
-    console.log(req.body);
-    var date= req.body.daterange.split("-");
-    console.log(date);
-    var query = {id:id};
-    var activities=[];
-
-    io.on('connect',function(socket){
-      console.log("connected");
-
+io.on('connect',function(socket){
+  console.log("connected pref");
+  socket.on('loadacts',function(id){
     MongoClient.connect(url,function(err,db){
-        if (err) throw err;
-        var dbo = db.db("crewtrip");
-        var myobj = {id: id,weather:req.body.weather,distance:req.body.distance,
-                        budget:req.body.budget,pop:req.body.pop,start:date[0],end:date[1]};
-        dbo.collection("tripP").insertOne(myobj,function(err,res){
-            if(err) throw err;
-            console.log("document inserted");
+      var dbo=db.db("crewtrip");
+      var query={id:id["id"]};
+      dbo.collection("activities").find(query).toArray(function(err,res){
+        data=[];
+        for(var i=0;i<res.length;i++){
+          data.push(res[i].act);
+        }
+        socket.emit("displayacts",data);
+        db.close();
+      });
+    });
+  });
 
+  socket.on('disconnect', function(){
+      console.log('user disconnected');
+  });
 
-        });
-        dbo.collection("activities").find(query).toArray(function(err,res){
-          acts=[];
-          for(var i=0;i<res.length;i++){
-            acts.append(res[i].act);
-          }
-          socket.emit("displayacts",acts);
-        })
+  socket.on('addactivity',function(act){
+    MongoClient.connect(url,function(err,db){
+      var dbo=db.db("crewtrip");
+      var obj={id:act["id"],act:act["activity"]};
+      dbo.collection("activities").insertOne(obj,function(err,res){
+        if(err) throw err;
+        console.log("activity inserted");
+      });
+      var query={id:act["id"]};
+      dbo.collection("activities").find(query).toArray(function(err,res){
+        data=[];
+        for(var i=0;i<res.length;i++){
+          data.push(res[i].act);
+        }
+        socket.emit("displayacts",data);
+        db.close();
+      });
+    });
+  });
+  socket.on('loadavg',function(act){
+    MongoClient.connect(url,function(err,db){
+      if (err) throw err;
+      var dbo = db.db("crewtrip");
+      var query={id:act["id"]};
         dbo.collection("tripP").find(query).toArray(function(err,res){
 
             if (err) throw err;
@@ -178,8 +155,37 @@ app.post('/results',function(req,res){
 
             db.close();
         })
+      });
     });
-  });
+
+
+});
+app.post('/results',function(req,res){
+    const current_url=new URL('localhost:3000'+req.url);
+    var params = current_url.searchParams;
+    var id = params.get('id');
+    console.log(req.body);
+    var date= req.body.daterange.split("-");
+    console.log(date);
+    var query = {id:id};
+    var activities=[];
+
+    MongoClient.connect(url,function(err,db){
+        if (err) throw err;
+        var dbo = db.db("crewtrip");
+        var myobj = {id: id,weather:req.body.weather,distance:req.body.distance,
+                        budget:req.body.budget,pop:req.body.pop,start:date[0],end:date[1]};
+        dbo.collection("tripP").insertOne(myobj,function(err,res){
+            if(err) throw err;
+            console.log("document inserted");
+
+
+        });
+
+
+    });
+
+
 
     res.sendFile(path.join(__dirname+'/results.html'));
 });
