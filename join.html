@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html ng-app="app">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,6 +17,9 @@
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      
+      <!-- angular -->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
 
       <!-- calendar range script -->
       <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
@@ -38,7 +41,7 @@
       <nav class="navbar navbar-fixed-top bg-transparent shadow-sm">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" href="index.html"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
+            <a class="navbar-brand" href="./"><img src="logo-dark.png" alt="crewtrip logotype" width="100"></a>
           </div>
         </div>
       </nav>
@@ -52,12 +55,14 @@
           <div class="card-body">
           <h1>Join an existing trip.</h1><br>
 
-          <form action="preferences" method="post" id="startform">
+          <div ng-controller="ctrl">
+          <form action="bla?id={{id}}" method="post" id="startform" >
+          </div>
             <div class="form-group">
 
               <label for="starting">Enter your crew's Trip ID</label>
-              <input type="text" class="form-control w-50" placeholder="Trip ID" id="starting" maxlength="" name='starting'>
-              <small id="emailHelp" class="form-text text-muted">6 character trip ID sent to your email from trip planner.</small>
+              <input type="text" class="form-control w-50" placeholder="Trip ID" id="id" maxlength="" name='id'>
+              <small id="emailHelp" class="form-text text-muted">Trip ID sent to your email from trip planner.</small>
 
             </div>
         </form>
@@ -74,6 +79,7 @@
 
       </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-4PL1O5-4f2h_ofU0-0NgREkUu3mKdiE&libraries=places"></script>
+    <script src="/script.js"></script>
     <script>
     $(function() {
       $('input[name="daterange"]').daterangepicker({
@@ -82,6 +88,9 @@
         console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
       });
     });
+    </script>
+    <script>
+      var id = $("#id");
     </script>
     <script type="text/javascript" src="./autocomplete.js"></script>
     </body>

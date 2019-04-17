@@ -1,16 +1,5 @@
 var socket= io.connect('http://localhost:3000/');
 
-$('#add').click(function(){
-    $('input').remove('.act');
-    $('li').remove('.act');
-    $('br').remove('.act');
-    var id = getUrlParameter('id');
-    socket.emit('addactivity',{
-      "id":id,
-      "activity":$("#checkboxName").val(),
-    });
-    return false;
-});
 $('#activities').ready(function(){
     var id = getUrlParameter('id');
     socket.emit('loadacts',{

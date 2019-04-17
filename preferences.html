@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html ng-app="app">
     <head>
       <meta charset="UTF-8" />
@@ -49,48 +49,48 @@
       <div class="card w-75 mb-3 mt-5 shadow-sm">
         <div class="card-body">
           <h1>Preferences</h1><br>
-          <div ng-app="app" ng-controller="ctrl">
-
-
+          <div ng-controller="ctrl">
           <form action="results?id={{id}}" method="post" id="resultform" >
-              </div>
-
+          </div>
 
               <div class="slidecontainer">
                 <label for="customRange1">Travel Distance</label></br>
-                <input name="distance" type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="1">
+                <input name="distance" type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="250">
               </div>
 
               <div class="slidecontainer">
                 <label for="customRange1">Weather</label></br>
-                <input name="weather" type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="1">
+                <input name="weather" type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
               </div>
 
               <div class="slidecontainer">
                 <label for="customRange1">Budget</label></br>
-                <input name="budget" type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="1">
+                <input name="budget" type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="500">
               </div>
 
               <div class="slidecontainer">
                 <label for="customRange1">Popularity of Destination</label></br>
-                <input name="pop" type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="1">
+                <input name="pop" type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="50">
               </div>
 
 
 
-              <br><h1>Activities</h1><br>
-              <div id="activities" name="acts">
-
-              </div>
-
-
+              <br><h1>Activities</h1>
+              <div ng-controller="activityCtrl">
+                <!-- Current List -->
+                <div ng-repeat="activity in activities" class="form-check">
+                  <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input" ng-model="activity.selected"> 
+                    {{activity.name}}
+                  </label>
+                </div>
+                </br>
                 <!-- Adding Checkboxes -->
                 <div class="form-inline">
-                  <input id="checkboxName" type="text" class="form-control mx-sm-3 mb-2" placeholder="Activity Name">
-                  <button id="add" type="button" class="btn btn-success mb-2 add_checkbox_button">Add To List</button>
+                  <input id="checkboxName" type="text" class="form-control mr-sm-3 mb-2" placeholder="Activity Name" ng-model="newActivity">
+                  <button type="button" class="btn btn-success mb-2" ng-click="addActivity()">Add To List</button>
                 </div>
-
-
+              </div>
               </br>
 
 
@@ -102,12 +102,8 @@
             <!-- BUTTONS -->
             <a href="start.html"><button type="button" class="btn btn-warning mt-4"> <img src="arrow.png" class="b" width="6"/></button></a>
 
-            <!-- END BUTTONS -->
-            </div>
-
 
           </form>
-
           <button type="submit" form="resultform" class="btn btn-primary mt-4">FINISH <img src="arrow.png" class="a" width="6"/></button>
 
         </div>
@@ -119,7 +115,6 @@
       <script src="/client.js"></script>
       <script src="script.js"></script>
       <script>
-
       $(function() {
         $('input[name="daterange"]').daterangepicker({
           opens: 'left'
@@ -132,10 +127,9 @@
           var url_string = window.location.href; //window.location.href
           var url = new URL(url_string);
           var c = url.searchParams.get("id");
-          var app=angular.module('app',[]);
-          app.controller('ctrl',function($scope){
-            $scope.id=c;
-          });
+          var id = getUrlParameter('id');
+
+      
       </script>
 
 

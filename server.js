@@ -39,7 +39,17 @@ app.get('/',function(req,res){
 app.get('/start.html',function(req,res){
     res.sendFile(path.join(__dirname+'/start.html'));
 });
+app.get('/join.html',function(req, res) {
+    res.sendFile(path.join(__dirname+'/join.html'));
+});
 
+
+app.post('/bla',function(req,res){
+    const current_url=new URL('localhost:3000'+req.url);
+    var params = current_url.searchParams;
+    var id = params.get('id');
+    res.redirect("/preferences?id="+id);
+});
 
 app.post('/preferences',function(req,res){
     console.log(req.body);
@@ -50,8 +60,8 @@ app.post('/preferences',function(req,res){
     var mail={
         from:'crewwtrip@gmail.com',
         to:req.body.mainEmail,
-        subject:'Welcome to crewTrip',
-        text:send_url.href
+        subject:'Welcome to crewTrip!',
+        text: "Here is your crew's trip link: " + send_url.href 
     };
 
     transporter.sendMail(mail,function(error,info){
@@ -74,8 +84,13 @@ app.post('/preferences',function(req,res){
 
         });
     });
+
+
+
     res.redirect("/preferences?id="+tripid);
 });
+
+
 app.get('/preferences',function(req,res){
     const current_url=new URL('localhost:3000'+req.url);
     var params = current_url.searchParams;
@@ -83,11 +98,16 @@ app.get('/preferences',function(req,res){
 
     res.sendFile(path.join(__dirname+'/preferences.html'))
 });
+
 app.get('/activities.html',function(req,res){
     res.sendFile(path.join(__dirname+'/activities.html'));
 });
+
+
 io.on('connect',function(socket){
   console.log("connected pref");
+
+
   socket.on('loadacts',function(id){
     MongoClient.connect(url,function(err,db){
       var dbo=db.db("crewtrip");
@@ -114,15 +134,7 @@ io.on('connect',function(socket){
       dbo.collection("activities").insertOne(obj,function(err,res){
         if(err) throw err;
         console.log("activity inserted");
-      });
-      var query={id:act["id"]};
-      dbo.collection("activities").find(query).toArray(function(err,res){
-        data=[];
-        for(var i=0;i<res.length;i++){
-          data.push(res[i].act);
-        }
-        socket.emit("displayacts",data);
-        db.close();
+        db.close()
       });
     });
   });
@@ -140,7 +152,6 @@ io.on('connect',function(socket){
             totB=0;
             for(var i=0;i<res.length;i++){
 
-
                 totW+=parseInt(res[i].weather);
                 totD+=parseInt(res[i].distance);
                 totP+=parseInt(res[i].pop);
@@ -150,7 +161,7 @@ io.on('connect',function(socket){
             avgD=totD/res.length;
             avgP=totP/res.length;
             avgB=totB/res.length;
-            var data={avgW:avgW,avgD:avgD,avgP:avgP,avgB:avgB,start:res[0].start,end:res[0].end};
+            var data={avgW:avgW, avgD:avgD, avgP:avgP, avgB:avgB, start:res[0].start, end:res[0].end};
             socket.emit("update",data);
 
             db.close();
@@ -158,8 +169,26 @@ io.on('connect',function(socket){
       });
     });
 
+  socket.on('pullActivities', function(act) {
+    MongoClient.connect(url,function(err,db){
+      if (err) throw err;
+      var dbo = db.db("crewtrip");
+      var query = {id:act["id"]};
+      dbo.collection("activities").find(query).toArray(function(err,res) {
+        data=[];
+        for(var i=0; i<res.length; i++) {
+            data.push({"name": res[i].act, "selected":false});
+        }
+        socket.emit("loadActivities", data)
+        db.close();
+      })
+
+    });
+  });
 
 });
+
+
 app.post('/results',function(req,res){
     const current_url=new URL('localhost:3000'+req.url);
     var params = current_url.searchParams;
@@ -189,9 +218,6 @@ app.post('/results',function(req,res){
 
     res.sendFile(path.join(__dirname+'/results.html'));
 });
-
-
-
 
 
 http.listen(3000);
