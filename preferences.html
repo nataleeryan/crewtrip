@@ -19,8 +19,10 @@
       <!-- some things in stylesheet override bootstrap -->
       <link rel="stylesheet" href="resources/style.css">
 
-      <!-- angular -->
+      <!-- angular & angular sliders -->
+      <link rel="stylesheet" type="text/css" href="/rzslider.css"/>
       <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+      <script src="./rzslider.min.js"></script>
 
       <!-- For date picker -->
       <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
@@ -28,7 +30,7 @@
       <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
       <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
     </head>
-    <body>
+    <body class="bg">
 
       <!-- Navigation bar -->
       <nav class="navbar navbar-fixed-top bg-transparent shadow-sm">
@@ -53,26 +55,19 @@
           <form action="results?id={{id}}" method="post" id="resultform" >
           </div>
 
-              <div class="slidecontainer">
-                <label for="customRange1">Travel Distance</label></br>
-                <input name="distance" type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="250">
+              <div ng-controller= "travelCtrl" class="slidecontainer">
+                <label for="customRange1">Travel Distance (mi):</label></br>
+                <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+                <input name="distance" type="hidden" value="{{slider.value}}">
               </div>
 
-              <div class="slidecontainer">
-                <label for="customRange1">Weather</label></br>
-                <input name="weather" type="range" class="custom-range w-50" id="customRange1" min="0" max="100" value="50">
-              </div>
-
-              <div class="slidecontainer">
-                <label for="customRange1">Budget</label></br>
-                <input name="budget" type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="500">
-              </div>
-
-              <div class="slidecontainer">
-                <label for="customRange1">Popularity of Destination</label></br>
-                <input name="pop" type="range" class="custom-range w-50" id="customRange1" min="1" max="100" value="50">
-              </div>
-
+              <div ng-controller="budgetCtrl" class="slidecontainer">
+                <label for="customRange1">Budget: </label></br>
+                <rzslider style="font-size: 11px" rz-slider-model ="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>
+                <input type="hidden" name="budgetLow" value="{{slider.minValue}}"><input type="hidden" name="budgetHigh" value="{{slider.maxValue}}">
+              </div><br>
+              
+            </div>
 
 
               <br><h1>Activities</h1>
@@ -113,7 +108,7 @@
 
       <script src="./client_socket.io.js"></script>
       <script src="/client.js"></script>
-      <script src="script.js"></script>
+      <script src="/script.js"></script>
       <script>
       $(function() {
         $('input[name="daterange"]').daterangepicker({
@@ -122,14 +117,6 @@
           console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
       });
-      </script>
-      <script>
-          var url_string = window.location.href; //window.location.href
-          var url = new URL(url_string);
-          var c = url.searchParams.get("id");
-          var id = getUrlParameter('id');
-
-      
       </script>
 
 

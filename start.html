@@ -19,21 +19,16 @@
 
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-      <!-- calendar range script -->
-      <script src="https://unpkg.com/gijgo@1.9.11/js/gijgo.min.js" type="text/javascript"></script>
-      <link href="https://unpkg.com/gijgo@1.9.11/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-      <!-- end script -->
-
-      <!-- For date picker -->
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-      <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-      <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+      <!-- Socket -->
+      <script src="./client_socket.io.js"></script>
+      
+      <!-- angular -->
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
 
       <!-- some things in stylesheet override bootstrap -->
       <link rel="stylesheet" href="resources/style.css">
     </head>
-    <body>
+    <body class="bg">
 
       <!-- Navigation bar -->
       <nav class="navbar navbar-fixed-top bg-transparent shadow-sm">
@@ -61,15 +56,14 @@
             <input type="text" class="form-control w-75" id="startingLocation" name="startingLocation" placeholder="Enter an address" required="required"><br/>
 
             <label for="mainEmail">What is your email?</label>
-            <input type="text" class="form-control w-75" placeholder="you@crewtrip.com" id="mainEmail" name='mainEmail' required="required"><br/><br/>
+            <input type="email" class="form-control w-75" placeholder="you@crewtrip.com" id="mainEmail" name='mainEmail' required="required"><br/><br/>
 
             <div class="items">
 
               <div class="form-group"><label>Invite your friends! Put their email in the box below to invite them.</label>
-                <input id="author_email" class="form-control w-75" name="author" required="required" type="EMAIL" placeholder="friend@crewtrip.com"/></div>
-
+                <input class="form-control w-75" name="friendEmail" required="required" type="email" placeholder="friend@crewtrip.com"/></div>
               </div>
-
+              <input type="hidden" name="friendCount" id="friendCount" value="1">
               <button type="button" class="btn btn-success add_field_button">Invite more friends</button></br>
 
 
@@ -87,18 +81,9 @@
 
 
       </div>
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-4PL1O5-4f2h_ofU0-0NgREkUu3mKdiE&libraries=places"></script>
-    <script type="text/javascript" src="./autocomplete.js"></script>
-    <script>
-    $(function() {
-      $('input[name="daterange"]').daterangepicker({
-        opens: 'left'
-      }, function(start, end, label) {
-        console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-      });
-    });
-    </script>
+    <script src="./autocomplete.js"></script>
     
     </body>
 </html>

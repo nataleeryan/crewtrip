@@ -37,10 +37,9 @@ socket.on('displayacts',function(data){
 
 
 socket.on('update',function(data){
-  $("input[name='weather']").val(data.avgW);
   $("input[name='distance']").val(data.avgD);
-  $("input[name='price']").val(data.avgB);
-  $("input[name='popularity']").val(data.avgP);
+  $("input[name='budget-low']").val(data.avgBLow);
+  $("input[name='budget-high']").val(data.avgBHigh);
   console.log(data);
   $('#start').text(data.start);
   $('#end').text(data.end);

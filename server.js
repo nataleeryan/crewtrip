@@ -42,6 +42,13 @@ app.get('/start.html',function(req,res){
 app.get('/join.html',function(req, res) {
     res.sendFile(path.join(__dirname+'/join.html'));
 });
+app.get('/rzslider.css', function(req,res) {
+    res.sendFile(path.join(__dirname + '/node_modules/angularjs-slider/dist/rzslider.css'));
+});
+
+app.get('/rzslider.min.js', function(req,res) {
+    res.sendFile(path.join(__dirname + '/node_modules/angularjs-slider/dist/rzslider.min.js'));
+});
 
 
 app.post('/bla',function(req,res){
@@ -57,20 +64,55 @@ app.post('/preferences',function(req,res){
     console.log(tripid);
     const send_url= new URL('localhost:3000/preferences?id='+tripid);
     console.log(send_url);
-    var mail={
+
+    // Sending email to main person
+    var mainMail={
         from:'crewwtrip@gmail.com',
         to:req.body.mainEmail,
         subject:'Welcome to crewTrip!',
-        text: "Here is your crew's trip link: " + send_url.href 
+        text: "Welcome to crewtrip! Your crew's id is: " + tripid + "  To set your preferences, your trip link is: " + send_url
     };
-
-    transporter.sendMail(mail,function(error,info){
+    transporter.sendMail(mainMail,function(error,info){
         if(error){
             console.log(error);
         } else{
             console.log('Email sent: ' +info.response);
         }
     });
+
+    // Sending emails to friends
+    var friends = req.body.friendCount
+    if (friends === '1') {
+        var friendMail={
+            from:'crewwtrip@gmail.com',
+            to: req.body.friendEmail,
+            subject:'Welcome to crewTrip!',
+            text: "You've been invited to a crew! Your crew's id is: " + tripid + "  To set your preferences, your trip link is: " + send_url
+        };
+        transporter.sendMail(friendMail,function(error,info){
+            if(error){
+                console.log(error);
+            } else{
+                console.log('Email sent: ' +info.response);
+            }
+        });
+    } else {
+        for (var i = 0; i < friends; i++) {
+            var friendMail={
+                from:'crewwtrip@gmail.com',
+                to: req.body.friendEmail[i],
+                subject:'Welcome to crewTrip!',
+                text: "You've been invited to a crew! Your crew's id is: " + tripid + "  To set your preferences, your trip link is: " + send_url
+            };
+            transporter.sendMail(friendMail,function(error,info){
+                if(error){
+                    console.log(error);
+                } else{
+                    console.log('Email sent: ' +info.response);
+                }
+            });
+        }
+    }
 
 
     MongoClient.connect(url,function(err,db){
@@ -146,22 +188,19 @@ io.on('connect',function(socket){
         dbo.collection("tripP").find(query).toArray(function(err,res){
 
             if (err) throw err;
-            totW=0;
             totD=0;
             totP=0;
-            totB=0;
+            totBLow=0;
+            totBHigh=0;
             for(var i=0;i<res.length;i++){
-
-                totW+=parseInt(res[i].weather);
                 totD+=parseInt(res[i].distance);
-                totP+=parseInt(res[i].pop);
-                totB+=parseInt(res[i].budget);
+                totBLow+=parseInt(res[i].budgetLow);
+                totBHigh+=parseInt(res[i].budgetHigh);
             }
-            avgW=totW/res.length;
             avgD=totD/res.length;
-            avgP=totP/res.length;
-            avgB=totB/res.length;
-            var data={avgW:avgW, avgD:avgD, avgP:avgP, avgB:avgB, start:res[0].start, end:res[0].end};
+            avgBLow=totBLow/res.length;
+            avgBHightotBHigh/res.length;
+            var data={avgD:avgD, avgBLow:avgBLow, avgBHigh:avgBHigh, start:res[0].start, end:res[0].end};
             socket.emit("update",data);
 
             db.close();
@@ -202,20 +241,13 @@ app.post('/results',function(req,res){
     MongoClient.connect(url,function(err,db){
         if (err) throw err;
         var dbo = db.db("crewtrip");
-        var myobj = {id: id,weather:req.body.weather,distance:req.body.distance,
-                        budget:req.body.budget,pop:req.body.pop,start:date[0],end:date[1]};
+        var myobj = {id: id,distance:req.body.distance,
+                        budgetLow:req.body.budgetLow,BudgetHigh:req.body.budgetHigh,start:date[0],end:date[1]};
         dbo.collection("tripP").insertOne(myobj,function(err,res){
             if(err) throw err;
             console.log("document inserted");
-
-
         });
-
-
     });
-
-
-
     res.sendFile(path.join(__dirname+'/results.html'));
 });
 

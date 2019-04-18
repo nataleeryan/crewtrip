@@ -4,6 +4,16 @@
 
  }
 
+ .bg {
+   background-image: url("bg1.png");
+   background-position: center;
+   background-size:cover;
+   background-repeat:no-repeat;
+ }
+ .card {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+ }
+
  body.gradient {
     background: white; /* fallback color */
     background: linear-gradient( to bottom, #fe5d53, #fe750c, #fec153);
