@@ -1,17 +1,26 @@
 <!doctype html>
-<html>
+<html ng-app="app">
     <head>
       <meta charset="UTF-8" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <title>crewtrip</title>
 
+      <!--Ensure maps api is loaded-->
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBkDId91o_sAAuCrobSpyQ8KI-xv2t3YUo&libraries=places"></script>
       <!-- FAVICON -->
       <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
       <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
       <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
       <link rel="manifest" href="site.webmanifest">
       <!-- FAVICON END -->
+
+      <link rel="stylesheet" href="resources/style.css">
+
+      <!-- angular & angular sliders -->
+      <link rel="stylesheet" type="text/css" href="/rzslider.css"/>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+      <script src="/rzslider.min.js"></script>
 
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -38,53 +47,55 @@
         <div class="card w-75 mb-5 mt-5 shadow-sm">
           <div class="card-body">
             <h1>Your Crew Trip</h1>
-            <p>Your trip is <p id="start"></p> to <p id="end"></p>.</p><br>
-            <button id="blah">
+            <button class="btn btn-info" id="blah" onclick="$(this).hide(); $('.results').show();">
                 GET RESULTS
             </button>
-
-            <form action="" id="number">
-              <div class="slidecontainer">
-                <label for="customRange1">Average Travel Distance</label></br>
-              <input name="distance" type="range" class="custom-range w-50" id="customRange1"   min="1" max="500" value="0">
-            </div>
-
+            <div class="results">
+            <h2>Your trip is</h2><p id="start"></p><p>to</p><p id="end"></p><br>
+            <h2>Distance</h2>
+            <p id="distance"></p><br>
+            <h2>Budget</h2>
+            <p id="budget"></p>
+            <br>
             
-            <div class="slidecontainer">
-              <label for="customRange1">Average Price Range</label></br>
-              <input name="price" type="range" class="custom-range w-50" id="customRange1" min="1" max="1000" value="0">
+
+
+            <h2>Activities Selected</h2>
             </div>
-          </form><br>
-
-
-          <h2>Activities Selected</h2>
-
-            <ul id="activities" class="list-unstyled">
+            <ul id="activities" class="list-unstyled"> 
 
             </ul><br>
+
+          <span class="results"><h2>Suggested Destinations</h2></span>
+          <div ng-controller="destinationsCtrl">
+            <p> {{status}} </p>
+            <div ng-repeat="location in destinations">
+              <img ng-src="{{location.icon}}"><br>
+              <p>{{location.name}}</p>
+              <p>{{location.vicinity}}</p>
+              <br>
+              <!--<ul><li ng-repeat="type in location.types">{{type}}</li></ul> potential feature of giving descriptive tags based on these values-->
+            </div>
+          </div>
 
           </div>
         </div>
         <!-- END FORM CARD -->
 
-
-
-        <h2>Suggested Destinations</h2>
-          <!--Google map-->
-          <div id="map-container-google-1" class="z-depth-1-half map-container" style="height:500px">
-            <iframe src="https://maps.google.com/maps?q=manhatan&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0"
-          style="border:0" allowfullscreen></iframe>
-          </div>
-
-        <!--Google Maps-->
-
-
+ 
+        
 
       </div>
     </body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="./client_socket.io.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="/client_socket.io.js"></script>
     <script src="/client.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#blah').show();
+        $('.results').hide();
+      });
+
+    </script>
 </html>

@@ -40,13 +40,17 @@ app.controller('ctrl',function($scope){
   $scope.id = id;
 });
 
+app.controller('joinCtrl',function($scope){
+  $scope.id = id;
+});
+
 
 app.controller('travelCtrl', function($scope){
   $scope.slider = {
-    value: 25,
+    value: 15,
     options: {
       floor: 1,
-      ceil: 50,
+      ceil: 30,
       step: 1
     }
   };
@@ -69,35 +73,46 @@ app.controller('budgetCtrl', function($scope){
   };
 });
 
-app.controller('popularityCtrl', function($scope){
-  $scope.slider = {
-    value: 25,
-    options: {
-      floor: 1,
-      ceil: 50,
-      step: 1
-    }
-  };
-});
+
 
 app.controller('activityCtrl', function($scope){
   var id = getUrlParameter('id');
 
   $scope.activities = [];
-
+  socket.emit('pullActivities', {
+    'id': id,
+  });
 
   socket.on('loadActivities', function(data) {
     $scope.activities = data;
-    console.log("loaded activities");
+    $scope.$digest(); 
   });
 
+  $scope.submitActivities = function() {
+    $http.post('/results', {'selected': $scope.selected})
+      .success(function (data) {
+        console.log("success");
+      })
+      .error(function(data) {
+        console.log('error');
+      })
+  }
 
   $scope.addActivity = function() {
-    $scope.activities.push({'name': $scope.newActivity, 'selected': true });
-    socket.emit('addactivity',{
-      "id":id,
-      "activity": $scope.newActivity,
-    });
-    $scope.newActivity =  '';
-  }
+    var index = $scope.activities.findIndex(activity => activity.name === $scope.newActivity);
+    if (($scope.newActivity != null) && ($scope.newActivity != "")) {
+      if (index === -1) {
+        $scope.activities.push({'name': $scope.newActivity, 'selected': true });
+        socket.emit('addactivity',{
+          "id":id,
+          "activity": $scope.newActivity,
+        });
+      } else {
+        $scope.activities[index] = {'name': $scope.newActivity, 'selected': true};
+      }
+    }
+    $scope.newActivity = '';
+  };
 });
+
+

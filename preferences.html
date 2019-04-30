@@ -51,31 +51,31 @@
       <div class="card w-75 mb-3 mt-5 shadow-sm">
         <div class="card-body">
           <h1>Preferences</h1><br>
-          <div ng-controller="ctrl">
-          <form action="results?id={{id}}" method="post" id="resultform" >
+          <div ng-controller="activityCtrl">
+            <div ng-controller="ctrl">
+          <form action="results?id={{id}}" ng-submit="submitActivities()" method="post" target="_self" id="resultform" >
           </div>
 
-              <div ng-controller= "travelCtrl" class="slidecontainer">
+              <div ng-controller= "travelCtrl" class="w-50">
                 <label for="customRange1">Travel Distance (mi):</label></br>
-                <rzslider rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
+                <rzslider class="custom-slider" rz-slider-model="slider.value" rz-slider-options="slider.options"></rzslider>
                 <input name="distance" type="hidden" value="{{slider.value}}">
               </div>
 
-              <div ng-controller="budgetCtrl" class="slidecontainer">
+              <div ng-controller="budgetCtrl" class="w-50">
                 <label for="customRange1">Budget: </label></br>
-                <rzslider style="font-size: 11px" rz-slider-model ="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>
+                <rzslider  class="custom-slider" style="font-size: 11px" rz-slider-model ="slider.minValue" rz-slider-high="slider.maxValue" rz-slider-options="slider.options"></rzslider>
                 <input type="hidden" name="budgetLow" value="{{slider.minValue}}"><input type="hidden" name="budgetHigh" value="{{slider.maxValue}}">
               </div><br>
               
-            </div>
 
 
+              
               <br><h1>Activities</h1>
-              <div ng-controller="activityCtrl">
                 <!-- Current List -->
                 <div ng-repeat="activity in activities" class="form-check">
                   <label class="form-check-label">
-                  <input type="checkbox" class="form-check-input" ng-model="activity.selected"> 
+                  <input type="checkbox" name="selected[]" value="{{activity.name}}"class="form-check-input" ng-model="activity.selected"> 
                     {{activity.name}}
                   </label>
                 </div>
@@ -83,8 +83,8 @@
                 <!-- Adding Checkboxes -->
                 <div class="form-inline">
                   <input id="checkboxName" type="text" class="form-control mr-sm-3 mb-2" placeholder="Activity Name" ng-model="newActivity">
-                  <button type="button" class="btn btn-success mb-2" ng-click="addActivity()">Add To List</button>
-                </div>
+                  <button id="submitActivity" type="button" class="btn btn-success mb-2" ng-click="addActivity()">Add To List</button>
+                </div> 
               </div>
               </br>
 
@@ -96,11 +96,8 @@
 
             <!-- BUTTONS -->
             <a href="start.html"><button type="button" class="btn btn-warning mt-4"> <img src="arrow.png" class="b" width="6"/></button></a>
-
-
           </form>
-          <button type="submit" form="resultform" class="btn btn-primary mt-4">FINISH <img src="arrow.png" class="a" width="6"/></button>
-
+          <button type="submit" form="resultform" ng-click="submitActivities()" class="btn btn-primary mt-4">FINISH <img src="arrow.png" class="a" width="6"/></button>
         </div>
       </div>
       <!-- END FORM CARD  -->
@@ -117,8 +114,16 @@
           console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
         });
       });
+      $(document).ready(function() {
+        var input = document.getElementById("checkBox");
+
+        $(window).keydown(function(event){
+          if(event.keyCode == 13) {
+            event.preventDefault();
+            document.getElementById("submitActivity").click();
+          }
+        });
+      });
       </script>
-
-
     </body>
 </html>
